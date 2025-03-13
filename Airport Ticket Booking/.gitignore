@@ -52,3 +52,47 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Ignore Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore build outputs
+bin/
+obj/
+out/
+
+# Ignore dependencies
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+
+# Ignore logs, lock files, and temporary files
+*.log
+*.lock
+*.tmp
+*.cache
+*.db
+
+# Ignore Rider files (JetBrains Rider IDE)
+.idea/
+*.sln.iml
+
+# Ignore ASP.NET specific files
+appsettings.Development.json
+appsettings.Local.json
+
+# Ignore user-specific settings
+*.userprefs
+*.suo
+*.csproj.user
+*.vscode/
+
+# Ignore ReSharper files
+*.DotSettings.user
+
+# Ignore generated files
+Generated_Code/
