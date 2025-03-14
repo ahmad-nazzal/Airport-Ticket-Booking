@@ -17,7 +17,5 @@ namespace Airport_Ticket_Booking.Core.Models.Flight
         public string? ArrivalAirport{ get; init; }
         public DateTime DepartureDate { get; init; }
         public DateTime ArrivalDate { get; init; }
-        public List<Cabin.Cabin> Cabins { get; set; } = new();
-
     }
 }
