@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Repositories\" />
+    <Folder Include="CsvData\" />
   </ItemGroup>
 
   <ItemGroup>
