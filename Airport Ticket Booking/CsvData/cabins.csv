@@ -1,3 +1,4 @@
-2c5d7e8f-4a5b-6c9d-dfe5-42f5f97e7890,Economy,250.00,200,180
-3d6e8f9g-5b6c-7d9e-efe6-52f6f98f8901,Business,800.00,50,45
-4e7f9g0h-6c7d-8e9f-fff7-62f7f99g9012,FirstClass,1500.00,20,18
+Id,CabinName,Price,TotalSeats,AvailableSeats,FlightId
+2c5d7e8f-4a5b-6c9d-dfe5-42f5f97e7890,Economy,250.00,200,180,3f8a1c92-1d2e-4a99-bcf2-12e2f94b1234
+3d6e8f9g-5b6c-7d9e-efe6-52f6f98f8901,Business,800.00,50,45,7e8a1c92-2b3f-4c99-bef3-22e3f95c5678
+4e7f9g0h-6c7d-8e9f-fff7-62f7f99g9012,FirstClass,1500.00,20,18,9a8b2d93-3c4d-5d99-cff4-32e4f96d6789
