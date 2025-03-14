@@ -10,8 +10,8 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.FlightRepository
     public interface IFlightRepository
     {
         public void AddFlight(Flight flight);
-        public void DeleteFlight(int flightId);
-        public Flight GetFlightById(int flightId);
+        public void DeleteFlight(Guid flightId);
+        public Flight GetFlightById(Guid flightId);
         public List<Flight> GetAllFlights();
         public void UpdateFlight(Flight flight);
 

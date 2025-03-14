@@ -10,8 +10,8 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.PassengerRepository
     public interface IPassengerRepository
     {
         public void AddPassenger(Passenger passenger);
-        public void DeletePassenger(int passengerId);
-        public Passenger GetPassengerById(int passengerId);
+        public void DeletePassenger(Guid passengerId);
+        public Passenger GetPassengerById(Guid passengerId);
         public List<Passenger> GetAllPassengers();
         public void UpdatePassenger(Passenger passenger);
     }
