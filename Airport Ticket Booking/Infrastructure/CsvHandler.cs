@@ -10,7 +10,7 @@ using CsvHelper.Configuration;
 
 namespace Airport_Ticket_Booking.Infrastructure
 {
-    public class CsvHandler<T>
+    public class CsvHandler<T> : IDataHandler<T>
     {
         private readonly string _filePath;
         public CsvHandler(string filePath)
@@ -22,7 +22,7 @@ namespace Airport_Ticket_Booking.Infrastructure
                 File.Create(_filePath).Close();
             }
         }
-        public List<T> ReadFromCsv()
+        public List<T> LoadData()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Airport_Ticket_Booking.Infrastructure
                 return new List<T>();
             }
         }
-        public void WriteToCsv(List<T> records)
+        public void SaveData(List<T> records)
         {
             try
             {

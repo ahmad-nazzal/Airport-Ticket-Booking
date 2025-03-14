@@ -1,4 +1,5 @@
 ﻿using Airport_Ticket_Booking.Models.Cabin;
+using Airport_Ticket_Booking.Models.Flight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,16 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository
     public class CabinRebository : ICabinRepository
     {
         private readonly List<Cabin> _cabins;
-        private readonly CsvHandler<Cabin> _csvHandler;
-        public CabinRebository(string filePath)
+        private readonly IDataHandler<Cabin> _dataHandler;
+        public CabinRebository(string filePath, IDataHandler<Cabin> dataHandler)
         {
-            _csvHandler = new CsvHandler<Cabin>(filePath);
-            _cabins = _csvHandler.ReadFromCsv();
+            _dataHandler = dataHandler;
+            _cabins = _dataHandler.LoadData();
         }
         public void AddCabin(Cabin cabin)
         {
             _cabins.Add(cabin);
-            _csvHandler.WriteToCsv(_cabins);
+            _dataHandler.SaveData(_cabins);
         }
         public void DeleteCabin(Guid cabinId)
         {
@@ -27,7 +28,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository
             if (cabin != null)
             {
                 _cabins.Remove(cabin);
-                _csvHandler.WriteToCsv(_cabins);
+                _dataHandler.SaveData(_cabins);
             }
         }
         public Cabin GetCabinById(Guid cabinId)
@@ -44,7 +45,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository
             if (existingCabin != null)
             {
                 existingCabin = cabin;
-                _csvHandler.WriteToCsv(_cabins);
+                _dataHandler.SaveData(_cabins);
             }
         }
     }

@@ -9,17 +9,17 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository
 {
     public class BookingRepository : IBookingRepository
     {
-        private readonly CsvHandler<Booking> _csvHandler;
+        private readonly IDataHandler<Booking> _dataHandler;
         private readonly List<Booking> _bookings;
-        public BookingRepository(string filePath)
+        public BookingRepository(string filePath, IDataHandler<Booking> dataHandler)
         {
-            _csvHandler = new CsvHandler<Booking>(filePath);
-            _bookings = _csvHandler.ReadFromCsv();
+            _dataHandler = dataHandler;
+            _bookings = _dataHandler.LoadData();
         }
         public void AddBooking(Booking booking)
         {
             _bookings.Add(booking);
-            _csvHandler.WriteToCsv(_bookings);
+            _dataHandler.SaveData(_bookings);
         }
         public void DeleteBooking(Guid bookingId)
         {
@@ -27,7 +27,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository
             if (booking != null)
             {
                 _bookings.Remove(booking);
-                _csvHandler.WriteToCsv(_bookings);
+                _dataHandler.SaveData(_bookings);
             }
         }
         public Booking GetBookingById(Guid bookingId)
@@ -44,7 +44,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository
             if (existingBooking != null)
             {
                 existingBooking = booking;
-                _csvHandler.WriteToCsv(_bookings);
+                _dataHandler.SaveData(_bookings);
             }
         }
 

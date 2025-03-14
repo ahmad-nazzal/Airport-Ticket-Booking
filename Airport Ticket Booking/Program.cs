@@ -6,7 +6,8 @@ using Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository;
 Console.WriteLine("Hello, World!");
 
 var filePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\bookings.csv";
-var bookingRepository = new BookingRepository(filePath);
+var dataHandler = new CsvHandler<Booking>(filePath);
+var bookingRepository = new BookingRepository(filePath, dataHandler);
 var bookings = bookingRepository.GetAllBookings();
 foreach (var booking in bookings)
 {
