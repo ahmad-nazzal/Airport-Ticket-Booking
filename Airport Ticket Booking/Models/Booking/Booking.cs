@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport_Ticket_Booking.Core.Models.Booking
+namespace Airport_Ticket_Booking.Models.Booking
 {
     public class Booking
     {

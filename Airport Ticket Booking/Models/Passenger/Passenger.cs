@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Airport_Ticket_Booking.Core.Models.Passenger
+namespace Airport_Ticket_Booking.Models.Passenger
 {
     public class Passenger
     {

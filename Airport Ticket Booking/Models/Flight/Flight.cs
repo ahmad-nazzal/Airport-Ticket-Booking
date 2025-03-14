@@ -1,11 +1,11 @@
-﻿using Airport_Ticket_Booking.Core.Models.Cabin;
+﻿using Airport_Ticket_Booking.Models.Cabin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport_Ticket_Booking.Core.Models.Flight
+namespace Airport_Ticket_Booking.Models.Flight
 {
     public class Flight
     {

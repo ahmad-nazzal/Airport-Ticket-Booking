@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport_Ticket_Booking.Core.Models.Cabin
+namespace Airport_Ticket_Booking.Models.Cabin
 {
     public enum CabinClass
     {

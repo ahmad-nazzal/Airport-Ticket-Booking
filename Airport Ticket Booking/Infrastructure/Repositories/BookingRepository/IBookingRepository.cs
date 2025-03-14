@@ -1,4 +1,4 @@
-﻿using Airport_Ticket_Booking.Core.Models.Booking;
+﻿using Airport_Ticket_Booking.Models.Booking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
