@@ -13,6 +13,6 @@ namespace Airport_Ticket_Booking.Core.Models.Cabin
         public required decimal Price { get; set; }
         public required int TotalSeats { get; init; }
         public int AvailableSeats { get; private set; }
-
+        public required Guid FlightId { get; init; }
     }
 }
