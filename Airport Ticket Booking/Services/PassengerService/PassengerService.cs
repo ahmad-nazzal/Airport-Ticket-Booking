@@ -28,34 +28,39 @@ namespace Airport_Ticket_Booking.Services.PassengerService
         {
             return _passengerRepository.GetAllPassengers();
         }
-        public void Refund(Guid passengerId, decimal refundAmount)
+        public bool Refund(Guid passengerId, decimal refundAmount)
         {
             var passenger = _passengerRepository.GetPassengerById(passengerId);
             if (passenger == null)
             {
                 Console.WriteLine("Passenger Not Found");
+                return false;
             }
             else
             {
                 passenger.AccountBalance += refundAmount;
                 _passengerRepository.UpdatePassenger(passenger);
+                return true;
             }
         }
-        public void DeductAccountBalance(Guid passengerId, decimal amount)
+        public bool DeductAccountBalance(Guid passengerId, decimal amount)
         {
             var passenger = _passengerRepository.GetPassengerById(passengerId);
             if (passenger == null)
             {
                 Console.WriteLine("Passenger Not Found");
+                return false;
             }
             else if (passenger.AccountBalance < amount)
             {
                 Console.WriteLine("Insufficient Balance");
+                return false;
             }
             else
             {
                 passenger.AccountBalance -= amount;
                 _passengerRepository.UpdatePassenger(passenger);
+                return true;
             }
         }
     }
