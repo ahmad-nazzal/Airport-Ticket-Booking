@@ -56,12 +56,10 @@ namespace Airport_Ticket_Booking.Services.PassengerService
                 Console.WriteLine("Insufficient Balance");
                 return false;
             }
-            else
-            {
-                passenger.AccountBalance -= amount;
-                _passengerRepository.UpdatePassenger(passenger);
-                return true;
-            }
+
+            passenger.AccountBalance -= amount;
+            _passengerRepository.UpdatePassenger(passenger);
+            return true;
         }
     }
 }
