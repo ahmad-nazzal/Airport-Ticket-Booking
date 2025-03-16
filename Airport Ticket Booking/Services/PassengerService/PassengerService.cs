@@ -36,12 +36,10 @@ namespace Airport_Ticket_Booking.Services.PassengerService
                 Console.WriteLine("Passenger Not Found");
                 return false;
             }
-            else
-            {
-                passenger.AccountBalance += refundAmount;
-                _passengerRepository.UpdatePassenger(passenger);
-                return true;
-            }
+
+            passenger.AccountBalance += refundAmount;
+            _passengerRepository.UpdatePassenger(passenger);
+            return true;
         }
         public bool DeductAccountBalance(Guid passengerId, decimal amount)
         {
