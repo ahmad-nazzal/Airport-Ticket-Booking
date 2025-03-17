@@ -1,4 +1,5 @@
 ﻿using Airport_Ticket_Booking.Models.Booking;
+using Airport_Ticket_Booking.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace Airport_Ticket_Booking.Services.BookingService
         public List<Booking> GetPassengerBookings(Guid passengerId);
         public List<Booking> GetFlightBookings(Guid flightId);
         public List<Booking> GetAllBookings();
-        public List<Booking> FilterBookings(Guid change);
+        public List<Booking> FilterBookings(BookingFilter filter);
     }
 }

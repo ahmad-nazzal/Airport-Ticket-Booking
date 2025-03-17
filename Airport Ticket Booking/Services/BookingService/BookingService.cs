@@ -1,6 +1,7 @@
 ﻿using Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository;
 using Airport_Ticket_Booking.Infrastructure.Repositories.FlightRepository;
 using Airport_Ticket_Booking.Models.Booking;
+using Airport_Ticket_Booking.Records;
 using Airport_Ticket_Booking.Services.CabinService;
 using Airport_Ticket_Booking.Services.FlightService;
 using Airport_Ticket_Booking.Services.PassengerService;
@@ -154,9 +155,28 @@ namespace Airport_Ticket_Booking.Services.BookingService
             _bookingRepository.UpdateBooking(booking);
         }
 
-        public List<Booking> FilterBookings(Guid change)
+        public List<Booking> FilterBookings(BookingFilter filter)
         {
-            throw new NotImplementedException();
+            return _bookingRepository.GetAllBookings()
+                .Where(booking =>
+                    (filter.FlightId == null || booking.FlightId == filter.FlightId) &&
+                    (filter.MinPrice == null || booking.TotalPrice >= filter.MinPrice) &&
+                    (filter.MaxPrice == null || booking.TotalPrice <= filter.MaxPrice) &&
+                    (string.IsNullOrEmpty(filter.DepartureCountry) ||
+                        _flightService.GetFlightById(booking.FlightId)?.DepartureCountry.Equals(filter.DepartureCountry, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.DestinationCountry) ||
+                        _flightService.GetFlightById(booking.FlightId)?.DestinationCountry.Equals(filter.DestinationCountry, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (filter.DepartureDate == null ||
+                        _flightService.GetFlightById(booking.FlightId)?.DepartureDate.Date == filter.DepartureDate.Value.Date) &&
+                    (string.IsNullOrEmpty(filter.DepartureAirport) ||
+                        _flightService.GetFlightById(booking.FlightId)?.DepartureAirport.Equals(filter.DepartureAirport, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (string.IsNullOrEmpty(filter.ArrivalAirport) ||
+                        _flightService.GetFlightById(booking.FlightId)?.ArrivalAirport.Equals(filter.ArrivalAirport, StringComparison.OrdinalIgnoreCase) == true) &&
+                    (filter.CabinClass == null ||
+                        _cabinService.GetCabinsByFlightId(booking.FlightId).Any(cabin => cabin.CabinName == filter.CabinClass)) &&
+                    (filter.PassengerId == null || booking.PassengerId == filter.PassengerId)
+                )
+                .ToList();
         }
 
         public List<Booking> GetAllBookings()
