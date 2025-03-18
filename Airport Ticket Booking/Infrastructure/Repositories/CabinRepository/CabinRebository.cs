@@ -12,7 +12,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository
     {
         private readonly List<Cabin> _cabins;
         private readonly IDataHandler<Cabin> _dataHandler;
-        public CabinRebository(string filePath, IDataHandler<Cabin> dataHandler)
+        public CabinRebository(IDataHandler<Cabin> dataHandler)
         {
             _dataHandler = dataHandler;
             _cabins = _dataHandler.LoadData();

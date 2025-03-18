@@ -12,7 +12,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.FlightRepository
     {
         private readonly List<Flight> _flights;
         private readonly IDataHandler<Flight> _dataHandler;
-        public FlightRepository(string filePath, IDataHandler<Flight> dataHandler)
+        public FlightRepository(IDataHandler<Flight> dataHandler)
         {
             _dataHandler = dataHandler;
             _flights = _dataHandler.LoadData();
