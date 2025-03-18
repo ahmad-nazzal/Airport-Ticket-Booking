@@ -10,7 +10,7 @@ namespace Airport_Ticket_Booking.Services.BookingService
 {
     public interface IBookingService
     {
-        public void BookFlight(Guid flightId, Guid passengerId, Guid cabinId);
+        public bool BookFlight(Guid flightId, Guid passengerId, Guid cabinId);
         public void CancelBooking(Guid bookingId);
         public void ChangeFlight(Guid bookingId, Guid newFlightId, Guid newCabinId);
         public void ChangeCabin(Guid bookingId, Guid newCabinId);

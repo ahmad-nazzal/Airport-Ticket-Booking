@@ -106,7 +106,10 @@ namespace Airport_Ticket_Booking.Menus
             var selectedCabin = SelectFromList("Cabin", cabins);
             if (selectedCabin == null) return;
 
-            _bookingService.BookFlight(selectedFlight.Id, selectedPassenger.Id, selectedCabin.Id);
+            if (!_bookingService.BookFlight(selectedFlight.Id, selectedPassenger.Id, selectedCabin.Id))
+            {
+                return;
+            }    
             Console.WriteLine("Flight booked successfully!");
             Console.ReadKey();
         }

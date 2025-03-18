@@ -28,27 +28,27 @@ namespace Airport_Ticket_Booking.Services.BookingService
             _passengerService = passengerService;
         }
 
-        public void BookFlight(Guid flightId, Guid passengerId, Guid cabinId)
+        public bool BookFlight(Guid flightId, Guid passengerId, Guid cabinId)
         {
             var flight = _flightService.GetFlightById(flightId);
             if (flight == null)
             {
                 Console.WriteLine("Flight Not Found");
-                return;
+                return false;
             }
 
             var passenger = _passengerService.GetPassengerById(passengerId);
             if (passenger == null)
             {
                 Console.WriteLine("Passenger Not Found");
-                return;
+                return false;
             }
 
             var cabin = _cabinService.GetCabinById(cabinId);
             if (cabin == null)
             {
                 Console.WriteLine("Cabin Not Found");
-                return;
+                return false;
             }
 
             var booking = new Booking
@@ -62,11 +62,11 @@ namespace Airport_Ticket_Booking.Services.BookingService
 
             if(!_passengerService.DeductAccountBalance(passengerId, cabin.Price))
             {
-                Console.WriteLine("Insufficient Balance");
-                return;
+                return false;
             }
 
             _bookingRepository.AddBooking(booking);
+            return true;
         }
 
         public void CancelBooking(Guid bookingId)
