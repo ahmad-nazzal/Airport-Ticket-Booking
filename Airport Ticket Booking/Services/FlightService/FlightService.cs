@@ -2,8 +2,10 @@
 using Airport_Ticket_Booking.Models.Flight;
 using Airport_Ticket_Booking.Records;
 using Airport_Ticket_Booking.Services.CabinService;
+using Airport_Ticket_Booking.Validation;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,14 +58,58 @@ namespace Airport_Ticket_Booking.Services.FlightService
                 )
                 .ToList();
         }
-        public void ImportFlightsFromCsv(string filePath)
+        public List<string> ImportFlightsFromCsv(string filePath)
         {
-            throw new NotImplementedException();
-        }
+            var errorsList = new List<string>();
 
-        public List<string> ValidateFlightData(Flight flight)
-        {
-            throw new NotImplementedException();
+            if (!File.Exists(filePath))
+            {
+                errorsList.Add("File not found.");
+                return errorsList;
+            }
+
+            var lines = File.ReadAllLines(filePath);
+            for (int i = 1; i < lines.Length; i++)
+            {
+                var columns = lines[i].Split(',');
+
+                if (columns.Length < 7)
+                {
+                    errorsList.Add($"Row {i + 1}: Invalid data format.");
+                    continue;
+                }
+
+                try
+                {
+                    var flight = new Flight
+                    {
+                        Id = Guid.NewGuid(),
+                        FlightName = columns[0].Trim(),
+                        DepartureCountry = columns[1].Trim(),
+                        DestinationCountry = columns[2].Trim(),
+                        DepartureAirport = columns[3].Trim(),
+                        ArrivalAirport = columns[4].Trim(),
+                        DepartureDate = DateTime.ParseExact(columns[5].Trim(), "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                        ArrivalDate = DateTime.ParseExact(columns[6].Trim(), "yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    };
+
+                    var validationErrors = FlightValidator.ValidateFlight(flight);
+                    if (validationErrors.Any())
+                    {
+                        errorsList.Add($"Row {i + 1} Errors: {string.Join(", ", validationErrors)}");
+                    }
+                    else
+                    {
+                        _flightRepository.AddFlight(flight);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorsList.Add($"Row {i + 1}: Error processing data - {ex.Message}");
+                }
+            }
+
+            return errorsList;
         }
     }
 }

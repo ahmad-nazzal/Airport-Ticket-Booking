@@ -16,7 +16,6 @@ namespace Airport_Ticket_Booking.Services.FlightService
         public List<Flight> GetAllFlights();
         public void AddFlight(Flight flight);
         public List<Flight> SearchFlights(FlightFilter filter);
-        public void ImportFlightsFromCsv(string filePath);
-        public List<string> ValidateFlightData(Flight flight);
+        public List<string> ImportFlightsFromCsv(string filePath);
     }
 }
