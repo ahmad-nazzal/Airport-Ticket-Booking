@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository
 {
-    public class CabinRebository : ICabinRepository
+    public class CabinRepository : ICabinRepository
     {
         private readonly List<Cabin> _cabins;
         private readonly IDataHandler<Cabin> _dataHandler;
-        public CabinRebository(IDataHandler<Cabin> dataHandler)
+        public CabinRepository(IDataHandler<Cabin> dataHandler)
         {
             _dataHandler = dataHandler;
             _cabins = _dataHandler.LoadData();

@@ -1,44 +1,43 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Airport_Ticket_Booking.Models.Booking;
-using Airport_Ticket_Booking.Infrastructure;
+﻿using Airport_Ticket_Booking.Infrastructure;
 using Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository;
+using Airport_Ticket_Booking.Infrastructure.Repositories.CabinRepository;
+using Airport_Ticket_Booking.Infrastructure.Repositories.FlightRepository;
+using Airport_Ticket_Booking.Infrastructure.Repositories.PassengerRepository;
+using Airport_Ticket_Booking.Menus;
+using Airport_Ticket_Booking.Models.Booking;
+using Airport_Ticket_Booking.Models.Cabin;
+using Airport_Ticket_Booking.Models.Flight;
+using Airport_Ticket_Booking.Models.Passenger;
+using Airport_Ticket_Booking.Services.BookingService;
+using Airport_Ticket_Booking.Services.CabinService;
+using Airport_Ticket_Booking.Services.FlightService;
+using Airport_Ticket_Booking.Services.PassengerService;
 
-Console.WriteLine("Hello, World!");
-
-var filePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\bookings.csv";
-var dataHandler = new CsvHandler<Booking>(filePath);
-var bookingRepository = new BookingRepository(filePath, dataHandler);
-var bookings = bookingRepository.GetAllBookings();
-foreach (var booking in bookings)
+class Program
 {
-    Console.WriteLine(booking.Id);
-    Console.WriteLine(booking.FlightId);
-    Console.WriteLine(booking.PassengerId);
-    Console.WriteLine(booking.CabinId);
-    Console.WriteLine(booking.BookingDate);
-    Console.WriteLine(booking.IsCancelled);
-    Console.WriteLine(booking.TotalPrice);
-    Console.WriteLine();
-    Console.WriteLine();
-    Console.WriteLine();
+    static void Main(string[] args)
+    {
+        var cabinFilePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\cabins.csv";
+        IDataHandler<Cabin> cabinDataHandler = new CsvHandler<Cabin>(cabinFilePath);
+        ICabinRepository cabinRepository = new CabinRepository(cabinDataHandler);
+        ICabinService cabinService = new CabinService(cabinRepository);
 
-}
-Console.WriteLine("-----------------");
-var existingBooking = bookingRepository.GetBookingById(bookings[0].Id);
-existingBooking.TotalPrice = 10124;
-bookingRepository.UpdateBooking(existingBooking);
-foreach (var booking in bookings)
-{
-    Console.WriteLine(booking.Id);
-    Console.WriteLine(booking.FlightId);
-    Console.WriteLine(booking.PassengerId);
-    Console.WriteLine(booking.CabinId);
-    Console.WriteLine(booking.BookingDate);
-    Console.WriteLine(booking.IsCancelled);
-    Console.WriteLine(booking.TotalPrice);
-    Console.WriteLine();
-    Console.WriteLine();
-    Console.WriteLine();
+        var flightFilePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\flights.csv";
+        IDataHandler<Flight> flightDataHandler = new CsvHandler<Flight>(flightFilePath);
+        IFlightRepository flightRepository = new FlightRepository(flightDataHandler);
+        IFlightService flightService = new FlightService(flightRepository, cabinService);
 
+        var passengerFilePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\passengers.csv";
+        IDataHandler<Passenger> passengerDataHandler = new CsvHandler<Passenger>(passengerFilePath);
+        IPassengerRepository passengerRepository = new PassengerRepository(passengerDataHandler);
+        IPassengerService passengerService = new PassengerService(passengerRepository);
+
+        var bookingFilePath = @"D:\\Trainings\\Foothill-trainig\\Tasks\\Airport-Ticket-Booking\\Airport Ticket Booking\\CsvData\bookings.csv";
+        IDataHandler<Booking> bookingDataHandler = new CsvHandler<Booking>(bookingFilePath);
+        IBookingRepository bookingRepository = new BookingRepository(bookingDataHandler);
+        IBookingService bookingService = new BookingService(bookingRepository, flightService, cabinService, passengerService);
+
+        var menu = new MainMenu(bookingService, flightService, passengerService, cabinService);
+        menu.ShowMainMenu();
+    }
 }
-Console.ReadLine();

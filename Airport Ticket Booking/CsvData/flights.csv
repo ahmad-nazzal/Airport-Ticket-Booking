@@ -1,0 +1,4 @@
+Id,FlightName,DepartureCountry,DestinationCountry,DepartureAirport,ArrivalAirport,DepartureDate,ArrivalDate
+3f8a1c92-1d2e-4a99-bcf2-12e2f94b1234,AA101,USA,UK,JFK,LHR,04/01/2025 08:00:00,04/01/2025 16:00:00
+7e8a1c92-2b3f-4c99-bef3-22e3f95c5678,BA202,UK,France,LHR,CDG,04/02/2025 10:00:00,04/02/2025 12:00:00
+9a8b2d93-3c4d-5d99-cff4-32e4f96d6789,EK303,UAE,USA,DXB,JFK,04/03/2025 15:00:00,04/03/2025 23:00:00
