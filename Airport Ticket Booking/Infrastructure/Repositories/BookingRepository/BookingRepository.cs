@@ -11,7 +11,7 @@ namespace Airport_Ticket_Booking.Infrastructure.Repositories.BookingRepository
     {
         private readonly IDataHandler<Booking> _dataHandler;
         private readonly List<Booking> _bookings;
-        public BookingRepository(string filePath, IDataHandler<Booking> dataHandler)
+        public BookingRepository(IDataHandler<Booking> dataHandler)
         {
             _dataHandler = dataHandler;
             _bookings = _dataHandler.LoadData();
