@@ -14,5 +14,10 @@ namespace Airport_Ticket_Booking.Models.Passenger
         public required string LastName { get; init; }
         public required string Email { get; init; }
         public required decimal AccountBalance { get; set; }
+
+        public override string ToString()
+        {
+            return $"First Name: {FirstName}, Last Name: {LastName}, Email: {Email}, Account Balance: {AccountBalance}";
+        }
     }
 }

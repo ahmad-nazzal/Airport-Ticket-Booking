@@ -37,5 +37,10 @@ namespace Airport_Ticket_Booking.Models.Flight
         [DataType(DataType.DateTime)]
         public required DateTime ArrivalDate { get; init; }
 
+        public override string ToString()
+        {
+            return $"Flight Name: {FlightName}, Departure Country: {DepartureCountry}, Destination Country: {DestinationCountry}, Departure Airport: {DepartureAirport}, Arrival Airport: {ArrivalAirport}, Departure Date: {DepartureDate}, Arrival Date: {ArrivalDate}";
+        }
+
     }
 }
