@@ -1,0 +1,5 @@
+FlightName,DepartureCountry,DestinationCountry,DepartureAirport,ArrivalAirport,DepartureDate,ArrivalDate
+Flight 101,USA,Canada,,Toronto,2025-03-20,2025-03-20
+Flight 102,UK,Germany,London,Berlin,2025-04-05,2025-04-05j
+Flight 103,France,Italy,Paris,Rome,2025-05-15,2025-05-15
+Flight 104,Germany,Japan,Berlin,Tokyo,2024-06-10,2025-06-11
